@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-//循环与使用strings.Join基准测试对比
+//练习1.3 循环与使用strings.Join基准测试对比
 
 var testData = []string{"a", "b", "c", "d", "e", "f"}
 
@@ -76,6 +76,10 @@ func BenchmarkBufferByte(b *testing.B) {
 		s := buf.String()
 		_ = s
 	}
+}
+
+func Test_echo1(t *testing.T) {
+	echo1()
 }
 
 /*

@@ -3,6 +3,7 @@ package echo
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -19,4 +20,16 @@ func echo() {
 		sep = " "
 	}
 	fmt.Println(s)
+}
+
+// 练习1.1
+func echo1() {
+	fmt.Println(os.Args[0])
+}
+
+// 练习1.2
+func echo2() {
+	for index, arg := range os.Args[1:] {
+		fmt.Println(strconv.Itoa(index+1) + " " + arg)
+	}
 }
