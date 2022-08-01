@@ -1,0 +1,21 @@
+// 测试数据，来源于《自由》
+// this is the dup test file, contents are from the freedom poetry
+"Freedom"
+By Rabindranath Tagore
+Freedom from fear is the freedom
+I claim for you my motherland!
+Freedom from the burden of the ages, bending your head,
+breaking your back, blinding your eyes to the beckoning
+call of the future;
+Freedom from the shackles of slumber wherewith
+you fasten yourself in night’s stillness,
+mistrusting the star that speaks of truth’s adventurous paths;
+freedom from the anarchy of destiny
+whole sails are weakly yielded to the blind uncertain winds,
+and the helm to a hand ever rigid and cold as death.
+Freedom from the insult of dwelling in a puppet’s world,
+where movements are started through brainless wires,
+repeated through mindless habits,
+where figures wait with patience and obedience for the
+master of show,
+to be stirred into a mimicry of life.
