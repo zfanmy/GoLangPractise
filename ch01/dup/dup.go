@@ -13,6 +13,7 @@ import (
 func Dup() {
 	counts := make(map[string]int)
 	files := os.Args[1:]
+	hasDupLine := false
 	if len(files) == 0 {
 		countLines(os.Stdin, counts)
 	} else {
@@ -24,16 +25,23 @@ func Dup() {
 			}
 			countLines(f, counts)
 			f.Close()
+			linesSlice, countSlice := sortCountsDesc(counts)
+			tempHasDupLine := false
+			for index, count := range countSlice {
+				if count > 1 {
+					// 练习1.4 出现重复行文件名
+					if !tempHasDupLine {
+						fmt.Printf("file have duplicate lines, name: %s \n", arg)
+					}
+					fmt.Printf("%d\t%s\n", count, linesSlice[index])
+					hasDupLine = true
+					tempHasDupLine = true
+				}
+			}
+			tempHasDupLine = false
 		}
 	}
-	hasDupLine := false
-	linesSlice, countSlice := sortCountsDesc(counts)
-	for index, count := range countSlice {
-		if count > 1 {
-			fmt.Printf("%d\t%s\n", count, linesSlice[index])
-			hasDupLine = true
-		}
-	}
+
 	if !hasDupLine {
 		fmt.Println("there are no duplicate lines!")
 	}
