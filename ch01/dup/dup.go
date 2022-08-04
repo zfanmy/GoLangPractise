@@ -3,8 +3,10 @@ package dup
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"sort"
+	"strings"
 )
 
 // Dup 找出重复行并输出
@@ -34,6 +36,26 @@ func Dup() {
 	}
 	if !hasDupLine {
 		fmt.Println("there are no duplicate lines!")
+	}
+}
+
+// RepeatLineFile 从文件中找出重复行
+func RepeatLineFile() {
+	counts := make(map[string]int)
+	for _, filemame := range os.Args[1:] {
+		data, err := ioutil.ReadFile(filemame)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "dup read file err:%v\n", err)
+			continue
+		}
+		for _, line := range strings.Split(string(data), "\n") {
+			counts[line]++
+		}
+	}
+	for line, n := range counts {
+		if n > 1 {
+			fmt.Printf("%d\t%s\n", n, line)
+		}
 	}
 }
 
@@ -67,7 +89,7 @@ type Pair struct {
 	Value int
 }
 
-// TestStableUseSlice 测试map以稳定方式排序，目前存在相同value值key的排序结果不一致问题
+// TestStableUseSlice 测试map以稳定方式排序，目前存在相同value值key的排序结果不一致问题，已解决
 func TestStableUseSlice() {
 	counts := make(map[string]int)
 	f, err := os.Open("/Users/boroughfan/GitDocuments/GoLangPractise/ch01/dup/text_feel_the_light_lyrics.txt")
@@ -86,7 +108,11 @@ func TestStableUseSlice() {
 		linesSlice = append(linesSlice, line)
 	}
 	sort.SliceStable(linesSlice, func(i, j int) bool {
-		return counts[linesSlice[i]] < counts[linesSlice[j]]
+		if counts[linesSlice[i]] != counts[linesSlice[j]] {
+			return counts[linesSlice[i]] < counts[linesSlice[j]]
+		}
+		// in this example: if lines have same count, order them alphabetically:
+		return linesSlice[i] < linesSlice[j]
 	})
 
 	for _, line := range linesSlice {
